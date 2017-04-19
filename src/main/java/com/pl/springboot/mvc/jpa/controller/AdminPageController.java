@@ -149,8 +149,57 @@ public class AdminPageController {
             user.setRole(newRole);
             request.getSession().setAttribute("user",user);
 
-            userDao.updateRole(user.getId_user(),user.getRole().getId_role());
-//            System.out.println(user.getId_user()+" "+newRole.getId_role());
+            System.out.println(user.getId_user()+" "+user.getRole().toString());
+            userDao.updateRole(user.getId_user(),user.getRole());
+
+            return "redirect:/adminPanel/userPage";
+        }
+    }
+
+
+    // CHANGE ADMIN COUNTRY IN USER PAGE
+    @RequestMapping(path = "changeCountry",method = RequestMethod.POST)
+    public String changeCountry(@ModelAttribute("userForm")User userForm,
+                                @SessionAttribute("user")User u,
+                                HttpServletRequest request) {
+        if (userForm.getCountry().isEmpty() || userForm.getCountry().equals("")) {
+            return "redirect:/adminPanel/userPage";
+        } else {
+            u.setCountry(userForm.getCountry());
+            request.getSession().setAttribute("user", u);
+            userDao.updateCountry(u.getId_user(), userForm.getCountry());
+            return "redirect:/adminPanel/userPage";
+        }
+    }
+
+
+    // CHANGE ADMIN LOGIN IN USER PAGE
+    @RequestMapping(path = "changeLogin",method = RequestMethod.POST)
+    public String changeLogin(@ModelAttribute("userForm")User userForm,
+                                @SessionAttribute("user")User u,
+                                HttpServletRequest request) {
+        if (userForm.getLogin().isEmpty() || userForm.getLogin().equals("")) {
+            return "redirect:/adminPanel/userPage";
+        } else {
+            u.setLogin(userForm.getLogin());
+            request.getSession().setAttribute("user", u);
+            userDao.updateLogin(u.getId_user(), userForm.getLogin());
+            return "redirect:/adminPanel/userPage";
+        }
+    }
+
+
+    // CHANGE ADMIN PASSWORD IN USER PAGE
+    @RequestMapping(path = "changePassword",method = RequestMethod.POST)
+    public String changePassword(@ModelAttribute("userForm")User userForm,
+                              @SessionAttribute("user")User u,
+                              HttpServletRequest request) {
+        if (userForm.getPassword().isEmpty() || userForm.getPassword().equals("")) {
+            return "redirect:/adminPanel/userPage";
+        } else {
+            u.setPassword(userForm.getPassword());
+            request.getSession().setAttribute("user", u);
+            userDao.updatePassword(u.getId_user(), userForm.getPassword());
             return "redirect:/adminPanel/userPage";
         }
     }

@@ -5,7 +5,10 @@
 <@page.template>
 <div class="container-fluid col-sm-9">
 
-    <table class="table table-responsive table-hover">
+    <div>
+
+    </div>
+    <table class="table table-responsive table-hover" style="margin-top: 20px;">
         <thead>
         <tr>
             <th>Id</th>
