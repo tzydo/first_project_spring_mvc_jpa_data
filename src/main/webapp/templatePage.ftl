@@ -40,8 +40,8 @@
                 <div class="col-sm-2" >
                     <p style="font-size: 30px;">Information</p>
                     <ul class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="205" style="font-size:20px;">
-                        <li><a href="/userPage/userPage">About Me</a></li>
-                        <li><a href="/userPage/employeeList">Employee</a></li>
+                        <li><a href="/adminPanel/userPage">About Me</a></li>
+                        <li><a href="/adminPanel/employeeList">Employee</a></li>
                         <li><a href="#section3">Products</a></li>
                         <li><a href="#section3">Products List</a></li>
                         <li><a href="#section3">Sold Products</a></li>

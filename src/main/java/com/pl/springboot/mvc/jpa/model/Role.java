@@ -1,7 +1,5 @@
 package com.pl.springboot.mvc.jpa.model;
 
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,8 +12,15 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Data
 @Table(name = "role")
-@NamedQuery(name = "Role.getRoleByIdRole",
-        query = "select r FROM Role r where r.id_role = ?1 ")
+
+@NamedQueries({
+        @NamedQuery(name = "Role.getRoleByIdRole",
+                query = "select r FROM Role r where r.id_role = ?1 "),
+
+        @NamedQuery(name = "Role.getRoleByRoleName",
+                query = "select r From Role r where r.name = ?1 "),
+})
+
 public class Role implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

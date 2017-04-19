@@ -6,4 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface RoleDao extends CrudRepository<Role,Long>{
     public Role getRoleByIdRole(int id);
+    public Role getRoleByRoleName(String name);
 }

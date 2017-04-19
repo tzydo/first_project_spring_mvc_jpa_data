@@ -1,22 +1,34 @@
 package com.pl.springboot.mvc.jpa.model;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
+
 
 @Entity
 @Table(name = "user")
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 
-@NamedQuery(name = "user.findIdByLoginAndPassword",
-            query = "SELECT u FROM User u WHERE u.login = ?1 AND u.password = ?2")
+
+@NamedQueries({
+        @NamedQuery(name = "user.findIdByLoginAndPassword",
+                query = "SELECT u FROM User u WHERE u.login = ?1 AND u.password = ?2"),
+})
+
+
+
+
 public class User implements Serializable {
 
     @Id

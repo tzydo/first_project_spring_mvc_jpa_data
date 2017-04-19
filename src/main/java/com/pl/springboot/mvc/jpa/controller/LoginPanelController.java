@@ -30,7 +30,7 @@ public class LoginPanelController {
                 if (user.getRole().getName().equals("user")){
                     return ("redirect:/userPage/failUser");
                 }else{
-                    return "redirect:/userPage/aboutUser";
+                    return "redirect:/adminPanel/";
                 }
             }
         }catch (Exception ex){
