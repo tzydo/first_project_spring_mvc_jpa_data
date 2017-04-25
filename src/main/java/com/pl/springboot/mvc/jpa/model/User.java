@@ -16,9 +16,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "user")
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+
 
 
 @NamedQueries({
@@ -27,8 +25,9 @@ import java.io.Serializable;
 })
 
 
-
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class User implements Serializable {
 
     @Id
@@ -41,11 +40,7 @@ public class User implements Serializable {
     private String login;
     private String password;
 
-    @OneToOne(cascade = CascadeType.ALL)
-//    @PrimaryKeyJoinColumn
+    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn(name = "id_role")
     private Role role;
-
-
-
 }

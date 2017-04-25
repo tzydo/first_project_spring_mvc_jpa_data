@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.annotation.Native;
+
 
 public interface UserDao extends CrudRepository<User,Integer> {
     User findByLoginAndPassword(String login, String password);
@@ -40,4 +42,5 @@ public interface UserDao extends CrudRepository<User,Integer> {
     @Transactional
     @Query("update User u set u.password =?2 WHERE u.id_user = ?1")
     void updatePassword(int id_user, String password);
+
 }
