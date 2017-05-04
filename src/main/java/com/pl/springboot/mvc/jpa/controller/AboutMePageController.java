@@ -29,16 +29,26 @@ public class AboutMePageController {
     @RequestMapping(value = "userPage",method = RequestMethod.GET)
     public String getAboutUserPage(Model model,
                                    @ModelAttribute("userForm")User userForm,
-                                   @SessionAttribute("user")User u){
+                                   HttpServletRequest request){
 
-        List<Role> roleList = (List<Role>) roleDao.findAll();
+        User user = (User) request.getSession().getAttribute("user");
+        try{
+            if(!user.equals(null)){
 
-        User user = u;
-        model.addAttribute("name",user.getName());
-        model.addAttribute("lastName",user.getLast_name());
-        model.addAttribute("roleList",roleList);
+                List<Role> roleList = (List<Role>) roleDao.findAll();
 
-        return "aboutMePage";
+
+                model.addAttribute("name", user.getName());
+                model.addAttribute("lastName", user.getLast_name());
+                model.addAttribute("roleList", roleList);
+
+                return "aboutMePage";
+            }else {
+                return "redirect:/login";
+            }
+        }catch (Exception ex){
+            return "redirect:/login";
+        }
     }
 
 

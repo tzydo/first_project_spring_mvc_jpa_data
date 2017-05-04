@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -24,17 +25,26 @@ public class EmployeePageController {
     //    LIST EMPLOYEE PAGE
     @RequestMapping(value = "employeeList",method = RequestMethod.GET)
     public String getEmployeeList(Model model,
-                                  @SessionAttribute("user")User u){
+                                  HttpServletRequest request){
 
-        List<User> userList = (List<User>) userDao.findAll();
-        List<Role> roleList = (List<Role>) roleDao.findAll();
-        User user = u;
 
-        model.addAttribute("name",user.getName());
-        model.addAttribute("lastName",user.getLast_name());
-        model.addAttribute("userList",userList);
-        model.addAttribute("roleList",roleList);
-        return "employeeList";
+        User user = (User) request.getSession().getAttribute("user");
+        try{
+            if(!user.equals(null)) {
+                List<User> userList = (List<User>) userDao.findAll();
+                List<Role> roleList = (List<Role>) roleDao.findAll();
+
+                model.addAttribute("name", user.getName());
+                model.addAttribute("lastName", user.getLast_name());
+                model.addAttribute("userList", userList);
+                model.addAttribute("roleList", roleList);
+                return "employeeList";
+            }else {
+                return "redirect:/login";
+            }
+        }catch(Exception ex){
+            return "redirect:/login";
+            }
     }
 
 
