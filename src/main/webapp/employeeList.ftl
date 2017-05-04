@@ -9,17 +9,17 @@
         <div style="font-size: 20px; margin-bottom: 10px;">
                 <i class="fa fa-user-plus" aria-hidden="true" style="color: black;"></i>
         </div>
-        <div class="sss"></div>
+        <div class="addEmployee"></div>
 
         <script>
             var x = 0;
             $(".fa-user-plus").click(function(){
 
                 if(x!=0){
-                    $(".sss").text(" ");
+                    $(".addEmployee").text(" ");
                     x=0;
                 }else {
-                    $('.sss').append(
+                    $('.addEmployee').append(
                             '<form action="addEmployee"  role="form" method="post" >'+
                             '<div class="col-sm-12 container-fluid" style="margin-top: 10">'+
                                 '<div class="col-sm-2"><input type="text" name="name" placeholder="Name" ></div>' +

@@ -8,10 +8,7 @@ import com.pl.springboot.mvc.jpa.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -45,17 +42,18 @@ public class AboutMePageController {
     }
 
 
+
     // CHANGE ADMIN NAME IN USER PAGE
     @RequestMapping(path = "changeName",method = RequestMethod.POST)
-    public String changeAdminName(@ModelAttribute("userForm")User userForm,
+    public String changeAdminName(@RequestParam("newName") String name,
                                   @SessionAttribute("user")User u,
                                   HttpServletRequest request){
-        if(userForm.getName().isEmpty() || userForm.getName().equals("")){
+        if(name.isEmpty() || name.equals("")|| name.equals(null)){
             return "redirect:/adminPanel/userPage";
         }else{
-            u.setName(userForm.getName());
+            u.setName(name);
             request.getSession().setAttribute("user",u);
-            userDao.updateName(u.getId_user(),userForm.getName());
+            userDao.updateName(u.getId_user(),name);
             return "redirect:/adminPanel/userPage";
         }
     }
@@ -64,15 +62,15 @@ public class AboutMePageController {
 
     // CHANGE ADMIN LAST NAME IN USER PAGE
     @RequestMapping(path = "changeLastName",method = RequestMethod.POST)
-    public String changeAdminLastName(@ModelAttribute("userForm")User userForm,
+    public String changeAdminLastName(@RequestParam("newLastName") String lastName ,
                                       @SessionAttribute("user")User u,
                                       HttpServletRequest request){
-        if(userForm.getLast_name().isEmpty() || userForm.getLast_name().equals("")){
+        if(lastName.isEmpty() || lastName.equals("") || lastName.equals(null)){
             return "redirect:/adminPanel/userPage";
         }else{
-            u.setLast_name(userForm.getLast_name());
+            u.setLast_name(lastName);
             request.getSession().setAttribute("user",u);
-            userDao.updateLastName(u.getId_user(),userForm.getLast_name());
+            userDao.updateLastName(u.getId_user(),lastName);
             return "redirect:/adminPanel/userPage";
         }
     }
@@ -102,15 +100,15 @@ public class AboutMePageController {
 
     // CHANGE ADMIN COUNTRY IN USER PAGE
     @RequestMapping(path = "changeCountry",method = RequestMethod.POST)
-    public String changeCountry(@ModelAttribute("userForm")User userForm,
+    public String changeCountry(@RequestParam("newCountry") String country,
                                 @SessionAttribute("user")User u,
                                 HttpServletRequest request) {
-        if (userForm.getCountry().isEmpty() || userForm.getCountry().equals("")) {
+        if (country.isEmpty() || country.equals("") || country.equals(null)) {
             return "redirect:/adminPanel/userPage";
         } else {
-            u.setCountry(userForm.getCountry());
+            u.setCountry(country);
             request.getSession().setAttribute("user", u);
-            userDao.updateCountry(u.getId_user(), userForm.getCountry());
+            userDao.updateCountry(u.getId_user(), country);
             return "redirect:/adminPanel/userPage";
         }
     }
@@ -118,15 +116,15 @@ public class AboutMePageController {
 
     // CHANGE ADMIN LOGIN IN USER PAGE
     @RequestMapping(path = "changeLogin",method = RequestMethod.POST)
-    public String changeLogin(@ModelAttribute("userForm")User userForm,
+    public String changeLogin(@RequestParam("newLogin") String login,
                               @SessionAttribute("user")User u,
                               HttpServletRequest request) {
-        if (userForm.getLogin().isEmpty() || userForm.getLogin().equals("")) {
+        if (login.isEmpty() || login.equals("") || login.equals(null)) {
             return "redirect:/adminPanel/userPage";
         } else {
-            u.setLogin(userForm.getLogin());
+            u.setLogin(login);
             request.getSession().setAttribute("user", u);
-            userDao.updateLogin(u.getId_user(), userForm.getLogin());
+            userDao.updateLogin(u.getId_user(), login);
             return "redirect:/adminPanel/userPage";
         }
     }
@@ -134,15 +132,15 @@ public class AboutMePageController {
 
     // CHANGE ADMIN PASSWORD IN USER PAGE
     @RequestMapping(path = "changePassword",method = RequestMethod.POST)
-    public String changePassword(@ModelAttribute("userForm")User userForm,
+    public String changePassword(@RequestParam("newPassword") String password,
                                  @SessionAttribute("user")User u,
                                  HttpServletRequest request) {
-        if (userForm.getPassword().isEmpty() || userForm.getPassword().equals("")) {
+        if (password.isEmpty() || password.equals("") || password.equals(null)) {
             return "redirect:/adminPanel/userPage";
         } else {
-            u.setPassword(userForm.getPassword());
+            u.setPassword(password);
             request.getSession().setAttribute("user", u);
-            userDao.updatePassword(u.getId_user(), userForm.getPassword());
+            userDao.updatePassword(u.getId_user(), password);
             return "redirect:/adminPanel/userPage";
         }
     }
