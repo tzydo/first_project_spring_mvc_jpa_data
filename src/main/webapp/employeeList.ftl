@@ -22,15 +22,15 @@
                     $('.addEmployee').append(
                             '<form action="addEmployee"  role="form" method="post" >'+
                             '<div class="col-sm-12 container-fluid" style="margin-top: 10">'+
-                                '<div class="col-sm-2"><input type="text" name="name" placeholder="Name" ></div>' +
-                                '<div class="col-sm-2"><input type="text" name="lastName" placeholder="Last Name"></div>' +
-                                '<div class="col-sm-2"><input type="text" name="country" placeholder="Country"></div>' +
-                                '<div class="col-sm-2"><input type="text" name="login" placeholder="Login"></div> ' +
-                                '<div class="col-sm-2"><input type="text" name="password" placeholder="Password"></div>' +
+                                '<div class="col-sm-2"><input type="text" name="name" placeholder="Name"                                        ></div>' +
+                                '<div class="col-sm-2"><input type="text" name="lastName" placeholder="Last                                     Name"></div>' +
+                                '<div class="col-sm-2"><input type="text" name="country"                                                        placeholder="Country"></div>' +
+                                '<div class="col-sm-2"><input type="text" name="login"                                                          placeholder="Login"></div> ' +
+                                '<div class="col-sm-2"><input type="text" name="password"                                                       placeholder="Password"></div>' +
 
                                 '<@spring.bind path="roleList"/>'+
                                 '<div class="col-sm-2" >'+
-                                ' <select class="selectpicker" style="padding: 3" id="selectRole" name="selectRole">'+
+                                ' <select class="selectpicker" style="padding: 3" id="selectRole"                                               name="selectRole">'+
                                 '<#list roleList as role>'+
                                 '<option>${role.name}</option>'+
                                 '</#list>'+

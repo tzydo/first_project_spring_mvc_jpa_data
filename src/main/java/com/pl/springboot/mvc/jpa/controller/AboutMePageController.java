@@ -89,8 +89,7 @@ public class AboutMePageController {
 
     // CHANGE ADMIN ROLE IN USER PAGE
     @RequestMapping(path = "changeRole",method = RequestMethod.POST)
-    public String changeAdminRole(@ModelAttribute("userForm")User userForm,
-                                  @SessionAttribute("user")User user,
+    public String changeAdminRole(@SessionAttribute("user")User user,
                                   @ModelAttribute("selectRole")String roleName,
                                   HttpServletRequest request){
         if(user.getRole().getName().equals(roleName)) {
@@ -100,7 +99,6 @@ public class AboutMePageController {
             user.setRole(newRole);
             request.getSession().setAttribute("user",user);
 
-            System.out.println(user.getId_user()+" "+user.getRole().toString());
             userDao.updateRole(user.getId_user(),user.getRole());
 
             return "redirect:/adminPanel/userPage";
