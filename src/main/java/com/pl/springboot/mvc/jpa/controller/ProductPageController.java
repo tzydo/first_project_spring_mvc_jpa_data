@@ -2,15 +2,13 @@ package com.pl.springboot.mvc.jpa.controller;
 
 import com.pl.springboot.mvc.jpa.dao.MarkDao;
 import com.pl.springboot.mvc.jpa.dao.ModelDao;
+import com.pl.springboot.mvc.jpa.dao.ProductDao;
 import com.pl.springboot.mvc.jpa.dao.ProductTypeDao;
 import com.pl.springboot.mvc.jpa.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -29,10 +27,13 @@ public class ProductPageController {
     @Autowired
     private ModelDao modelDao;
 
+    @Autowired
+    private ProductDao productDao;
+
+
     //    ABOUT PRODUCTS PAGE
     @RequestMapping(value = "productPage",method = RequestMethod.GET)
     public String getProductPage(Model model,
-                                   @ModelAttribute("userForm")User userForm,
                                    HttpServletRequest request){
 
         User user = (User) request.getSession().getAttribute("user");
@@ -60,6 +61,47 @@ public class ProductPageController {
             return "redirect:/login";
         }
     }
+
+
+//EXCEPTION
+    @ExceptionHandler(Exception.class)
+    public String handleExceptions(Exception anExc) {
+        return "redirect:/adminPanel/productPage";
+    }
+
+
+    //ADD PRODUCT
+    @RequestMapping(path = "addProduct", method = RequestMethod.POST)
+    public String addProduct(@RequestParam(value = "selectProductType") String productName,
+                             @RequestParam("selectMark")String markName,
+                             @RequestParam("selectModel")String modelName,
+                             @RequestParam("price") int price,
+                             @RequestParam("count") int count,
+                             @RequestParam("description") String description){
+
+        if(!productName.equals("") || !productName.equals(null) ||
+                !markName.equals("") ||!markName.equals(null) ||
+                !modelName.equals("") ||!modelName.equals(null) ||
+                (price > 0)  || (count>0) || !description.equals(null)
+                || !description.equals("")){
+
+            Product product = Product.builder()
+                                        .id_product(0)
+                                        .product_type(productName)
+                                        .mark(markName)
+                                        .model(modelName)
+                                        .count(count)
+                                        .price(price)
+                                        .description(description)
+                                        .build();
+
+            System.out.println(product.toString());
+            productDao.save(product);
+        }
+
+        return "redirect:/adminPanel/productPage";
+    }
+
 
 
 

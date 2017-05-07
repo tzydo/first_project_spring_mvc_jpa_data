@@ -4,10 +4,97 @@
 <@page.template>
 
     <div class="col-sm-10">
-        <div class="container-fluid" style="margin-top: 50px;">
+        <div class="container-fluid" style="margin-top: 10px;">
+
+
+
+                            <#--ADD PRODUCT TYPE-->
+            <div style="font-size: 40px; margin-bottom: 10px;">
+                <i class="fa fa-laptop" aria-hidden="true" style="color: black;"></i>
+            </div>
+
+            <div class="show"></div>
+            <script>
+                $(document).ready(function(){
+                    var x =0;
+
+                    $(".fa-laptop").click(function(){
+                        if(x==1){
+                            $(".show").text(" ");
+                            x=0;
+                        }else{
+                            $(".show").append(
+        '<form action="addProduct"  role="form" method="post">'+
+        '<div class="col-sm-1"></div>'+
+        '<div class="col-sm-4">'+
+            '<@spring.bind path="productTypeList"/>'+
+            '<select class="selectpicker form-control" id="selectProductType" name="selectProductType">'+
+                '<#list productTypeList as productType>'+
+                    '<option>${productType.name}</option>'+
+                '</#list>'+
+            '</select>'+
+
+
+            '<@spring.bind path="markList"/>'+
+            '<select class="selectpicker form-control" id="selectMark" name="selectMark">'+
+                '<#list markList as mark>'+
+                    '<option>${mark.name}</option>'+
+                '</#list>'+
+            '</select>'+
+
+
+            '<@spring.bind path="modellList"/>'+
+            '<select class="selectpicker form-control" id="selectModel" name="selectModel">'+
+                '<#list modellList as model>'+
+                    '<option>${model.name}</option>'+
+                '</#list>'+
+            '</select>'+
+
+        '<input class="inp" type="text" name="price" placeholder="Price"  style="width: 100%">'+
+        '<input class="inp" type="text" name="count" placeholder="Count" style="width: 100%">'+
+
+        '<style>'+
+
+            '.selectpicker{'+
+                'margin-bottom: 5px;'+
+            '}'+
+
+            '.inp{'+
+                'margin-bottom: 5px;'+
+            '}'+
+
+        '</style>'+
+        '</div>'+
+
+        '<div class="col-sm-4">'+
+            '<div class="form-group">'+
+                '<label for="description">Description:</label>'+
+                '<textarea class="form-control" rows="7 " id="description" name="description"></textarea>'+
+            '</div>'+
+        '</div>'+
+
+        '<div class="col-sm-1"></div>'+
+
+        '<div class="row">'+
+            '<div class="col-sm-8"></div>'+
+            '<div class="col-sm-2">'+
+                '<button type="submit" class="btn btn-success btn-lg">Add</button>'+
+            '</div>'+
+        '</div>'+
+        '</form>'
+
+                            );
+                            x=1;
+                        }
+                    });
+                });
+
+            </script>
+
+
 
                                     <#-- ADD PRODUCT TYPE  -->
-            <div class="row">
+            <div class="row" style="margin-top: 20px;">
                 <div class="col-sm-1"></div>
 
                 <div class="col-sm-10" style="font-size: large;">

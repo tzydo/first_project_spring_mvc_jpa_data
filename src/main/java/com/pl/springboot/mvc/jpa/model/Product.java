@@ -2,6 +2,7 @@ package com.pl.springboot.mvc.jpa.model;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,7 +14,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-
+@Builder
 @NamedQuery(name = "Product.getProductById",
             query = "SELECT p FROM Product p where p.id_product =?1")
 public class Product implements Serializable{

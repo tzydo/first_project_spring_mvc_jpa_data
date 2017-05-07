@@ -6,7 +6,7 @@
 <div class=" col-sm-10">
 
     <div class="container-fluid">
-        <div style="font-size: 20px; margin-bottom: 10px;">
+        <div style="font-size: 30px; margin-bottom: 10px;">
                 <i class="fa fa-user-plus" aria-hidden="true" style="color: black;"></i>
         </div>
         <div class="addEmployee"></div>
